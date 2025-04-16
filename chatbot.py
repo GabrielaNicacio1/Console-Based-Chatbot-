@@ -22,15 +22,13 @@ output = model(**encoded_input)
 
 #store a few recent exchanges to keep the convo coherent
 #allow users to adjust response behavior usig settings like:
-max_length;
-temperture;
+max_length
+temperture
 
 #keep chatting until user says exit
-while(1):
-  #
-  #
-  if (input == "exit")
- {
-   return 0;
- }
+while True:
+  input = input()
+  
+  if (input == "exit"):
+    break
 #in TensorFlow
