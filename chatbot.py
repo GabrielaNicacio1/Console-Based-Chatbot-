@@ -20,4 +20,17 @@ text = "Replace me by any text you'd like."
 encoded_input = tokenizer(text, return_tensors='pt')
 output = model(**encoded_input)
 
+#store a few recent exchanges to keep the convo coherent
+#allow users to adjust response behavior usig settings like:
+max_length;
+temperture;
+
+#keep chatting until user says exit
+while(1):
+  #
+  #
+  if (input == "exit")
+ {
+   return 0;
+ }
 #in TensorFlow
