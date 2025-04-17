@@ -12,14 +12,6 @@ generator("Hello, I'm a language model,", max_length=30, num_return_sequences=5)
  {'generated_text': "Hello, I'm a language model, a functional language...\n\nI'm a functional language. Is it hard? A little, yes. But"},
  {'generated_text': "Hello, I'm a language model, not an object model.\n\nIn a nutshell, I need to give me objects from which I can get"}]
 
-#to get the features of a given text from pyTorch
-from transformers import GPT2Tokenizer, GPT2Model
-tokenizer = GPT2Tokenizer.from_pretrained('gpt2-medium')
-model = GPT2Model.from_pretrained('gpt2-medium')
-text = "Hello"
-encoded_input = tokenizer(text, return_tensors='pt')
-output = model(**encoded_input)
-
 #allow users to adjust response behavior usig settings like max length and setting
 # temp is how creative/advanced the models responses are. Range from 0.1 - 1.0 (lowest is less creative)
 
