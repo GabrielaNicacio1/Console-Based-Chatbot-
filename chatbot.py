@@ -21,14 +21,21 @@ max_length = int (input("Enter max response length") or 80) #if they dont give o
 temperature = float(input("Enter how creative/advanced you would like chatbot to be (range 0.1-1.0): ") or 0.2)
 
 while True:
-  user_input = input('You: ')
-  if (user_input.lower() == 'exit'): #keep chatting until user says exit
+  user_input = input("You: ")
+  if (user_input.lower() == "exit"): #keep chatting until user says exit
     break
   #add their response to array of history
   recent_exchanges.append("You: {user_input}")
   recent_exchanges = recent_exchanges[-3:] #keep most recent 3
-  response = generator(user_input, max_length = 80, temperature = 0.2)[0]['generated_text'] #set higher max length ??
-  print("Chatbot: ", response.text)
+  chat_prompt = "\n".join(recent_exchanges) + "\nChatbot:"
+  #storing in array will look like this 
+  #{You: Hello, Chatbot: Hi I'm a chatbot!, You: Bye}
+
+  response = generator(chat_prompt, max_length = 80, temperature = 0.2)[0]['generated_text'] #set higher max length ??
+  answer = response[len(chat_prompt)]
+  
+  print("Chatbot: ", answer)
+  recent_exchanges.append("Chatbot: {answer}")
 
   #else:
    # print("Chatbot: I'm sorry, I don't understand that.")
