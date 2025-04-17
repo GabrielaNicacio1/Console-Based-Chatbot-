@@ -12,11 +12,13 @@ generator("Hello, I'm a language model,", max_length=30, num_return_sequences=5)
  {'generated_text': "Hello, I'm a language model, a functional language...\n\nI'm a functional language. Is it hard? A little, yes. But"},
  {'generated_text': "Hello, I'm a language model, not an object model.\n\nIn a nutshell, I need to give me objects from which I can get"}]
 
-#allow users to adjust response behavior usig settings like max length and setting
-# temp is how creative/advanced the models responses are. Range from 0.1 - 1.0 (lowest is less creative)
-
 #store a few recent exchanges to keep the convo coherent
 recent_exchanges = []
+
+#allow users to adjust response behavior usig settings like max length and setting
+# temp is how creative/advanced the models responses are. Range from 0.1 - 1.0 (lowest is less creative)
+max_length = int (input("Enter max response length") or 80) #if they dont give one then default 80
+temperature = float(input("Enter how creative/advanced you would like chatbot to be (range 0.1-1.0): ") or 0.2)
 
 while True:
   user_input = input('You: ')
