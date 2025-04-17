@@ -20,17 +20,19 @@ text = "Hello"
 encoded_input = tokenizer(text, return_tensors='pt')
 output = model(**encoded_input)
 
-
-#store a few recent exchanges to keep the convo coherent
 #allow users to adjust response behavior usig settings like max length and setting
-
 # temp is how creative/advanced the models responses are. Range from 0.1 - 1.0 (lowest is less creative)
 
-#keep chatting until user says exit
+#store a few recent exchanges to keep the convo coherent
+recent_exchanges = []
+
 while True:
   user_input = input('You: ')
-  if (user_input.lower() == 'exit'):
+  if (user_input.lower() == 'exit'): #keep chatting until user says exit
     break
+  #add their response to array of history
+  recent_exchanges.append("You: {user_input}")
+  recent_exchanges = recent_exchanges[-3:] #keep most recent 3
   response = generator(user_input, max_length = 80, temperature = 0.2)[0]['generated_text'] #set higher max length ??
   print("Chatbot: ", response.text)
 
