@@ -1,6 +1,6 @@
 #chatbot implementation
 #using pre trained LLM (GPT2 medium from Hugging Face)
-
+import random
 from transformers import pipeline, set_seed
 generator = pipeline('text-generation', model='gpt2-medium')
 set_seed(42)
@@ -16,19 +16,33 @@ generator("Hello, I'm a language model,", max_length=30, num_return_sequences=5)
 from transformers import GPT2Tokenizer, GPT2Model
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2-medium')
 model = GPT2Model.from_pretrained('gpt2-medium')
-text = "Replace me by any text you'd like."
+text = "Hello"
 encoded_input = tokenizer(text, return_tensors='pt')
 output = model(**encoded_input)
 
+responses = {"hello": ["Hi there!", "Hello!", "Greetings!"],
+             "How are you?": ["I'm doing well, thank you!", "I'm fine, and you?"],
+             "goodbye": ["Goodbye!", "See you later!", "Take care!"]
+             }
 #store a few recent exchanges to keep the convo coherent
 #allow users to adjust response behavior usig settings like:
 max_length
 temperture
 
+
+chart = model.start_chat()
 #keep chatting until user says exit
 while True:
-  input = input()
-  
-  if (input == "exit"):
+  user_input = input('You: ')
+  if (user_input.lower() == 'exit'):
     break
+  else if user_input.lower() in responses:
+    bot_reply = random.choice(responses[user_input.lower()])
+    print("Chatbot:", bot_reply)
+  else:
+    print("Chatbot: I'm sorry, I don't understand that."")
+  
+  response = chat.send_input(user_input)
+  print('Chatbot: ', response.text)
+
 #in TensorFlow
