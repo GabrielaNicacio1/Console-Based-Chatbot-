@@ -17,7 +17,7 @@ recent_exchanges = []
 
 #allow users to adjust response behavior usig settings like max length and setting
 # temp is how creative/advanced the models responses are. Range from 0.1 - 1.0 (lowest is less creative)
-max_length = int (input("Enter max response length") or 80) #if they dont give one then default 80
+max_length = int (input("Enter max response length: ") or 80) #if they dont give one then default 80
 temperature = float(input("Enter how creative/advanced you would like chatbot to be (range 0.1-1.0): ") or 0.2)
 
 while True:
@@ -32,7 +32,7 @@ while True:
   #{You: Hello, Chatbot: Hi I'm a chatbot!, You: Bye}
 
   #chat prompt has recent exchanges and prompt to help generate response all in one string tho
-  response = generator(chat_prompt, max_length = max_length, temperature = temperature[0]['generated_text']) #set higher max length ??
+  response = generator(chat_prompt, max_length = max_length, temperature = temperature, truncation = True)[0]['generated_text'] #set higher max length ??
   #response has recent exchanges+ its response so need to strip the first part for just the answer
   answer = response[len(chat_prompt):].strip().split("\n")[0]
   
